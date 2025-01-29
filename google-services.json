@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "778180528902",
+    "project_id": "studypal-91421",
+    "storage_bucket": "studypal-91421.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778180528902:android:56e1de1d6e2b57e32eec87",
+        "android_client_info": {
+          "package_name": "com.aditya.studypal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhTerRpJ-EjvUG-xZhFrbhd70ZuE-A1IU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
