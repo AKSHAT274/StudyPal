@@ -10,8 +10,9 @@ import Downloads from './screens/Downloads';
 import BookChat from './screens/BookChat';
 import UploadAndChat from './screens/UploadAndChat';
 import Book from './screens/Book.js';
-import ResearchPaper from './screens/ResearchPaper.js'
-import Attendance from './screens/Attendance.js'
+import ResearchPaper from './screens/ResearchPaper.js';
+import Attendance from './screens/Attendance.js';
+import Syllabus from './screens/Syllabus.js'
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -27,6 +28,8 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Books" component={BooksScreen} />
       <Drawer.Screen name="Research Papers" component={ResearchPaper} />
       <Drawer.Screen name="Attendance" component={Attendance} />
+      <Drawer.Screen name="Syllabus" component={Syllabus} />
+
     </Drawer.Navigator>
   );
 };
