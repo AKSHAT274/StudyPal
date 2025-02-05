@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './firebaseConfig';
+import { auth } from '../firebase';
 import LoginForm from './LoginForm';
 
 const LoginScreen = ({ navigation }) => {
@@ -26,7 +26,7 @@ const LoginScreen = ({ navigation }) => {
       .then((userCredential) => {
         const user = userCredential.user;
         Alert.alert('Login successful!', `Hello, ${user.email}`);
-        navigation.navigate('Dashboard', { user }); // Navigate to Dashboard with user data
+        navigation.navigate('Main'); // Navigate to Dashboard with user data
       })
       .catch((error) => {
         setErrorMessage(error.message);

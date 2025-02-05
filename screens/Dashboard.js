@@ -1,11 +1,11 @@
-// Dashboard.js
+// screens/Dashboard.js
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { getAuth, signOut } from 'firebase/auth';
-import { auth } from './firebaseConfig';
+import { auth } from '../firebase';
 
-const Dashboard = ({ navigation, route }) => {
-  const user = route.params?.user; // Get user data from navigation params
+const Dashboard = ({ navigation }) => {
+  const user = auth.currentUser; // Get the current user from Firebase
 
   const handleLogout = () => {
     const authInstance = getAuth();
@@ -22,13 +22,8 @@ const Dashboard = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Welcome, {user?.email}!</Text>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Profile', { user })}
-      >
-        <Text style={styles.buttonText}>View Profile</Text>
-      </TouchableOpacity>
+      <Text style={styles.profileText}>Profile Details:</Text>
+      <Text style={styles.detail}>Email: {user?.email}</Text>
 
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutButtonText}>Logout</Text>
@@ -51,19 +46,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: '#333',
   },
-  button: {
-    backgroundColor: '#456FE8',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    borderRadius: 5,
-    marginBottom: 10,
-    width: '100%',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
+  profileText: {
+    fontSize: 20,
     fontWeight: '600',
+    marginBottom: 10,
+    color: '#333',
+  },
+  detail: {
+    fontSize: 16,
+    color: '#555',
+    marginBottom: 20,
   },
   logoutButton: {
     backgroundColor: '#ff4444',
