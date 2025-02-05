@@ -13,6 +13,7 @@ import Book from './screens/Book.js';
 import ResearchPaper from './screens/ResearchPaper.js';
 import Attendance from './screens/Attendance.js';
 import Syllabus from './screens/Syllabus.js'
+import Event from './screens/Event.js';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -29,7 +30,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Research Papers" component={ResearchPaper} />
       <Drawer.Screen name="Attendance" component={Attendance} />
       <Drawer.Screen name="Syllabus" component={Syllabus} />
-
+      <Drawer.Screen name="Upcoming Events" component={Event} />
     </Drawer.Navigator>
   );
 };
