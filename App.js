@@ -11,6 +11,7 @@ import BookChat from './screens/BookChat';
 import UploadAndChat from './screens/UploadAndChat';
 import Book from './screens/Book.js';
 import ResearchPaper from './screens/ResearchPaper.js'
+import Attendance from './screens/Attendance.js'
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -25,6 +26,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Upload and Chat" component={UploadAndChat} />
       <Drawer.Screen name="Books" component={BooksScreen} />
       <Drawer.Screen name="Research Papers" component={ResearchPaper} />
+      <Drawer.Screen name="Attendance" component={Attendance} />
     </Drawer.Navigator>
   );
 };
