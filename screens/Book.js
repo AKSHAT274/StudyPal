@@ -9,7 +9,7 @@ const booksData = [
   // Add more books as needed
 ];
 
-const BooksScreen = () => {
+const Book = () => {
   const [books, setBooks] = useState(booksData);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BooksScreen;
+export default Book;
