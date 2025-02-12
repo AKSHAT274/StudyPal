@@ -26,7 +26,7 @@ const LoginScreen = ({ navigation }) => {
       .then((userCredential) => {
         const user = userCredential.user;
         Alert.alert('Login successful!', `Hello, ${user.email}`);
-        navigation.navigate('Main'); // Navigate to Dashboard with user data
+        navigation.navigate('Main'); 
       })
       .catch((error) => {
         setErrorMessage(error.message);
