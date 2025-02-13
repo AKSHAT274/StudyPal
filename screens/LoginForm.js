@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, togglePasswordVisibility, handleLogin, isLoading, errorMessage }) => {
+const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, togglePasswordVisibility, handleLogin, handleSignUp, isLoading, errorMessage }) => {
   return (
     <View style={styles.container}>
       <View>
@@ -41,7 +41,7 @@ const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, 
           </TouchableOpacity>
         </View>
         <View style={styles.registerContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleSignUp}>
             <Text style={styles.registerText}>
               Don’t have an account? <Text style={styles.registerLink}>Sign Up</Text>
             </Text>
