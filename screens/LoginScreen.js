@@ -1,36 +1,41 @@
 // LoginScreen.js
-import React, { useState } from 'react';
-import { Alert } from 'react-native';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
-import LoginForm from './LoginForm';
+import React, { useState } from "react";
+import { Alert } from "react-native";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../firebase";
+import LoginForm from "./LoginForm";
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSignUp, setIsSignUp] = useState(false);
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
   const handleLogin = () => {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailRegex.test(email)) {
-      Alert.alert('Invalid email', 'Please re-enter email');
+      Alert.alert("Invalid email", "Please re-enter email");
       return;
     }
 
     setIsLoading(true);
-    setErrorMessage('');
+    setErrorMessage("");
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        Alert.alert('Login successful!', `Hello, ${user.email}`);
-        navigation.navigate('Main'); // Navigate to Dashboard
+        Alert.alert("Login successful!", `Hello, ${user.email}`);
+        navigation.navigate("Main"); // Navigate to Dashboard
       })
       .catch((error) => {
         setErrorMessage(error.message);
-        Alert.alert('Login failed!', error.message);
+        Alert.alert("Login failed!", error.message);
       })
       .finally(() => {
         setIsLoading(false);
@@ -38,29 +43,26 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const handleSignUp = () => {
-    if (email === '' || password === '') {
-      Alert.alert('Error', 'Please enter email and password');
+    if (!emailRegex.test(email)) {
+      Alert.alert("Invalid email", "Please re-enter email");
       return;
     }
-
     setIsLoading(true);
-    setErrorMessage('');
-
+    setErrorMessage("");
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        Alert.alert('Sign Up Successful!', `Welcome, ${user.email}`);
-        navigation.navigate('Main');
+        Alert.alert("Sign Up successful!", `Welcome, ${user.email}`);
+        setIsSignUp(false);
       })
       .catch((error) => {
         setErrorMessage(error.message);
-        Alert.alert('Sign Up failed!', error.message);
+        Alert.alert("Sign Up failed!", error.message);
       })
       .finally(() => {
         setIsLoading(false);
       });
   };
-
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
@@ -74,9 +76,11 @@ const LoginScreen = ({ navigation }) => {
       isPasswordVisible={isPasswordVisible}
       togglePasswordVisibility={togglePasswordVisibility}
       handleLogin={handleLogin}
-      handleSignUp={handleSignUp} // Pass sign-up function
+      handleSignUp={handleSignUp}
       isLoading={isLoading}
       errorMessage={errorMessage}
+      isSignUp={isSignUp}
+      setIsSignUp={setIsSignUp}
     />
   );
 };

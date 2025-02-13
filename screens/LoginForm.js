@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, togglePasswordVisibility, handleLogin, handleSignUp, isLoading, errorMessage }) => {
+const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, togglePasswordVisibility, handleLogin, handleSignUp, isLoading, errorMessage, isSignUp, setIsSignUp }) => {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>{isSignUp ? "Sign Up" : "Login"}</Text>
       </View>
       <View>
-        <Text style={styles.titleLogin}>Please login to continue.</Text>
+        <Text style={styles.titleLogin}>{isSignUp ? "Please sign up to continue." : "Please login to continue."}</Text>
       </View>
       <View style={styles.inputContainer}>
         <View style={styles.inputWrapper}>
@@ -41,16 +41,17 @@ const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, 
           </TouchableOpacity>
         </View>
         <View style={styles.registerContainer}>
-          <TouchableOpacity onPress={handleSignUp}>
-            <Text style={styles.registerText}>
-              Don’t have an account? <Text style={styles.registerLink}>Sign Up</Text>
+          <TouchableOpacity onPress={() => setIsSignUp(!isSignUp)}>
+          <Text style={styles.registerText}>
+              {isSignUp ? "Already have an account?" : "Don’t have an account?"}
+              <Text style={styles.registerLink}>{isSignUp ? " Login" : " Sign Up"}</Text>
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={handleLogin}>
+        <TouchableOpacity onPress={isSignUp ? handleSignUp : handleLogin}>
           <View style={styles.loginButton}>
             <Text style={styles.loginButtonText}>
-              {isLoading ? "Logging in..." : "Login"}
+            {isLoading ? "Loading..." : isSignUp ? "Sign Up" : "Login"}
             </Text>
           </View>
         </TouchableOpacity>
