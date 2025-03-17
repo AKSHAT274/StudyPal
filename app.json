@@ -1,26 +1,40 @@
 {
   "expo": {
-    "name": "helloexpo",
-    "slug": "helloexpo",
+    "name": "studypal",
+    "slug": "studypal",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/studypal logo.jpeg",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#e0f7fa"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+        "image": "./assets/studypal-logo.jpeg",
+        "resizeMode": "contain",
+        "backgroundColor": "#e0f7fa"
+      }
     },
     "android": {
+      "splash": {
+        "mdpi": "./assets/studypal-logo.jpeg",
+        "hdpi": "./assets/studypal-logo.jpeg",
+        "xhdpi": "./assets/studypal-logo.jpeg",
+        "xxhdpi": "./assets/studypal-logo.jpeg",
+        "xxxhdpi": "./assets/studypal-logo.jpeg",
+        "resizeMode": "contain",
+        "backgroundColor": "#e0f7fa"
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package":"com.aditya.studypal"
+      "package": "com.aditya.studypal"
     },
     "web": {
       "favicon": "./assets/favicon.png"

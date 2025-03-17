@@ -1,19 +1,20 @@
 // App.js or Navigation.js
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import LoginScreen from './screens/LoginScreen';
-import Dashboard from './screens/Dashboard';
-import Notes from './screens/Notes';
-import Downloads from './screens/Downloads';
-import BookChat from './screens/BookChat';
-import UploadAndChat from './screens/UploadAndChat';
-import Book from './screens/Book.js';
-import ResearchPaper from './screens/researchPaper.js';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import LoginScreen from "./screens/LoginScreen";
+import Dashboard from "./screens/Dashboard";
+import Notes from "./screens/Notes";
+import Downloads from "./screens/Downloads";
+import BookChat from "./screens/BookChat";
+import UploadAndChat from "./screens/UploadAndChat";
+import Book from "./screens/Book.js";
+import ResearchPaper from "./screens/researchPaper.js";
 // import Attendance from './screens/Attendance.js';
-import Syllabus from './screens/Syllabus.js'
-import Event from './screens/Event.js';
+import Syllabus from "./screens/Syllabus.js";
+import Event from "./screens/Event.js";
+import SplashScreenComponent from './screens/SplashScreen'
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -38,8 +39,17 @@ const DrawerNavigator = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreenComponent}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen  
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Main"
           component={DrawerNavigator}
