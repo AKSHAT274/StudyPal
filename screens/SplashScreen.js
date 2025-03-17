@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
 
 const SplashScreenComponent = ({ navigation }) => {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -10,24 +12,35 @@ const SplashScreenComponent = ({ navigation }) => {
     // Prevent the splash screen from auto-hiding
     SplashScreen.preventAutoHideAsync();
 
-    // Simulate app loading (e.g., fetching data, initializing Firebase, etc.)
-    setTimeout(() => {
-      setAppIsReady(true);
-    }, 4000); // 4 seconds delay
+    // Check authentication state
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setTimeout(() => {
+        if (user) {
+          // User is logged in, navigate to Dashboard
+          navigation.replace("Main");
+        } else {
+          // User is not logged in, navigate to Login
+          navigation.replace("Login");
+        }
+        setAppIsReady(true);
+      }, 3000); // 4 seconds delay
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
     if (appIsReady) {
-      // Hide the splash screen and navigate to the main screen
+      // Hide the splash screen
       SplashScreen.hideAsync();
-      navigation.replace("Login"); // Replace 'Login' with your main screen
     }
   }, [appIsReady]);
 
   return (
     <View style={styles.container}>
       <Image
-        source={require("../assets/studypal-logo.jpeg")} // Replace with your app logo
+        source={require("../assets/studypal-logo.jpeg")}
         style={styles.logo}
       />
       <Text style={styles.title}>StudyPal</Text>

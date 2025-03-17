@@ -8,15 +8,14 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
 const Dashboard = ({ navigation }) => {
   const user = auth.currentUser;
 
   const handleLogout = () => {
-    const authInstance = getAuth();
-    signOut(authInstance)
+    signOut(auth)
       .then(() => {
         Alert.alert("Logged out successfully!");
         navigation.navigate("Login");

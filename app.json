@@ -4,11 +4,11 @@
     "slug": "studypal",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/studypal-logo.jpeg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/studypal logo.jpeg",
+      "image": "./assets/studypal-logo.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#e0f7fa"
     },
