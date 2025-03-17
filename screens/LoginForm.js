@@ -1,20 +1,48 @@
 // LoginForm.js
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, togglePasswordVisibility, handleLogin, handleSignUp, isLoading, errorMessage, isSignUp, setIsSignUp }) => {
+const LoginForm = ({
+  email,
+  setEmail,
+  password,
+  setPassword,
+  isPasswordVisible,
+  togglePasswordVisibility,
+  handleLogin,
+  handleSignUp,
+  isLoading,
+  errorMessage,
+  isSignUp,
+  setIsSignUp,
+}) => {
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>{isSignUp ? "Sign Up" : "Login"}</Text>
       </View>
       <View>
-        <Text style={styles.titleLogin}>{isSignUp ? "Please sign up to continue." : "Please login to continue."}</Text>
+        <Text style={styles.titleLogin}>
+          {isSignUp
+            ? "Please sign up to continue."
+            : "Please login to continue."}
+        </Text>
       </View>
       <View style={styles.inputContainer}>
         <View style={styles.inputWrapper}>
-          <MaterialIcons name="mail" size={20} color="#9d9d9d" style={styles.icon} />
+          <MaterialIcons
+            name="mail"
+            size={20}
+            color="#9d9d9d"
+            style={styles.icon}
+          />
           <TextInput
             placeholder="Email"
             value={email}
@@ -23,7 +51,12 @@ const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, 
           />
         </View>
         <View style={styles.inputWrapper}>
-          <MaterialIcons name="lock" size={20} color="#9d9d9d" style={styles.icon} />
+          <MaterialIcons
+            name="lock"
+            size={20}
+            color="#9d9d9d"
+            style={styles.icon}
+          />
           <TextInput
             placeholder="Password"
             value={password}
@@ -42,16 +75,18 @@ const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, 
         </View>
         <View style={styles.registerContainer}>
           <TouchableOpacity onPress={() => setIsSignUp(!isSignUp)}>
-          <Text style={styles.registerText}>
+            <Text style={styles.registerText}>
               {isSignUp ? "Already have an account?" : "Don’t have an account?"}
-              <Text style={styles.registerLink}>{isSignUp ? " Login" : " Sign Up"}</Text>
+              <Text style={styles.registerLink}>
+                {isSignUp ? " Login" : " Sign Up"}
+              </Text>
             </Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity onPress={isSignUp ? handleSignUp : handleLogin}>
           <View style={styles.loginButton}>
             <Text style={styles.loginButtonText}>
-            {isLoading ? "Loading..." : isSignUp ? "Sign Up" : "Login"}
+              {isLoading ? "Loading..." : isSignUp ? "Sign Up" : "Login"}
             </Text>
           </View>
         </TouchableOpacity>
