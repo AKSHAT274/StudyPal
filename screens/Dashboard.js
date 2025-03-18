@@ -10,25 +10,32 @@ import {
 } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../services/firebase";
+import { CommonActions } from "@react-navigation/native";
 
 const Dashboard = ({ navigation }) => {
   const user = auth.currentUser;
 
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        Alert.alert("Logged out successfully!");
-        navigation.navigate("Login");
-      })
-      .catch((error) => {
-        Alert.alert("Logout failed!", error.message);
-      });
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      Alert.alert("Logged out successfully!");
+
+      // Reset navigation stack and navigate to Login
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "Login" }], // Makes Login the only available screen
+        })
+      );
+    } catch (error) {
+      Alert.alert("Logout failed!", error.message);
+    }
   };
 
   return (
     <View style={styles.container}>
       <Image
-        source={require("../assets/profilepicDefault.jpg")} // Adjust the path as necessary
+        source={require("../assets/profilepicDefault.jpg")}
         style={styles.profileImage}
       />
       <Text style={styles.welcomeText}>Welcome, {user?.email}!</Text>
