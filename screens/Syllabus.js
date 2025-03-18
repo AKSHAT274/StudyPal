@@ -1,55 +1,94 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, FlatList } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  TouchableOpacity
+} from "react-native";
 
 const syllabusData = [
-  { id: '1', semester: 'I', topic: 'Calculus' },
-  { id: '2', semester: 'II', topic: 'Mechanics' },
-  { id: '3', semester: 'I', topic: 'Data Structures' },
-  { id: '4', semester: 'III', topic: 'Genetics' },
+  { id: "1", semester: "I", topic: "Calculus" },
+  { id: "2", semester: "II", topic: "Mechanics" },
+  { id: "3", semester: "I", topic: "Data Structures" },
+  { id: "4", semester: "III", topic: "Genetics" }
   // Add more syllabus items as needed
 ];
 
 const Syllabus = () => {
   const [syllabus, setSyllabus] = useState(syllabusData);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedSemester, setSelectedSemester] = useState(null);
 
-  const handleSearch = (query) => {
+  const handleSearch = query => {
     setSearchQuery(query);
+    filterSyllabus(query, selectedSemester);
+  };
+
+  const filterSyllabus = (query, semester) => {
+    let filteredSyllabus = syllabusData;
     if (query) {
-      const filteredSyllabus = syllabusData.filter((item) =>
-        item.semester.toLowerCase().includes(query.toLowerCase()) ||
-        item.topic.toLowerCase().includes(query.toLowerCase())
+      filteredSyllabus = filteredSyllabus.filter(
+        item =>
+          item.semester.toLowerCase().includes(query.toLowerCase()) ||
+          item.topic.toLowerCase().includes(query.toLowerCase())
       );
-      setSyllabus(filteredSyllabus);
-    } else {
-      setSyllabus(syllabusData);
     }
+    if (semester) {
+      filteredSyllabus = filteredSyllabus.filter(
+        item => item.semester === semester
+      );
+    }
+    setSyllabus(filteredSyllabus);
+  };
+
+  const handleSemesterFilter = semester => {
+    setSelectedSemester(semester);
+    filterSyllabus(searchQuery, semester);
   };
 
   return (
-    <background> <Text style={styles.title}>Syllabus</Text>
+    <Background> <Text style={styles.title}>Syllabus</Text>
 
-    {/* Search Bar */}
-    <TextInput
-      style={styles.searchBar}
-      placeholder="Search by subject or topic..."
-      value={searchQuery}
-      onChangeText={handleSearch}
-    />
+      <TextInput
+        style={styles.searchBar}
+        placeholder="Search by semester or topic..."
+        value={searchQuery}
+        onChangeText={handleSearch}
+      />
 
-    {/* Syllabus list */}
-    <FlatList
-      data={syllabus}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <View style={styles.syllabusContainer}>
-          <Text style={styles.syllabusTitle}>{item.semester}</Text>
-          <Text style={styles.syllabusDetails}>Topic: {item.topic}</Text>
-        </View>
-      )}
-    />
-   </background>
-      
+      <View style={styles.filterContainer}>
+        {["I", "II", "III"].map(sem =>
+          <TouchableOpacity
+            key={sem}
+            style={[
+              styles.filterButton,
+              selectedSemester === sem && styles.selectedFilter
+            ]}
+            onPress={() => handleSemesterFilter(sem)}
+          >
+            <Text style={styles.filterText}>
+              {sem}
+            </Text>
+          </TouchableOpacity>
+        )}
+      </View>
+
+      <FlatList
+        data={syllabus}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) =>
+          <View style={styles.syllabusContainer}>
+            <Text style={styles.syllabusTitle}>
+              Semester: {item.semester}
+            </Text>
+            <Text style={styles.syllabusDetails}>
+              Topic: {item.topic}
+            </Text>
+          </View>}
+      />
+    </View>
   );
 };
 
@@ -57,34 +96,64 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: "#faf3e0"
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontSize: 26,
+    fontWeight: "bold",
+    textAlign: "center",
+    fontFamily: "serif",
+    marginBottom: 20
   },
   searchBar: {
     height: 40,
-    borderColor: '#ddd',
+    borderColor: "#c4a484",
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginBottom: 20,
+    backgroundColor: "#fff",
+    marginBottom: 20
   },
   syllabusContainer: {
     marginBottom: 15,
-    padding: 10,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 5,
+    padding: 15,
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3
   },
   syllabusTitle: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "bold",
+    fontFamily: "serif"
   },
   syllabusDetails: {
-    fontSize: 14,
-    color: '#555',
+    fontSize: 16,
+    color: "#555",
+    fontFamily: "serif"
   },
+  filterContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 20
+  },
+  filterButton: {
+    marginHorizontal: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 5,
+    backgroundColor: "#d2691e"
+  },
+  selectedFilter: {
+    backgroundColor: "#8b4513"
+  },
+  filterText: {
+    color: "#fff",
+    fontWeight: "bold"
+  }
 });
 
 export default Syllabus;
