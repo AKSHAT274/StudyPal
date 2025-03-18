@@ -4,10 +4,11 @@ import { Alert } from "react-native";
 import {
   getAuth,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../services/firebase";
-import LoginForm from "./LoginForm";
+import LoginForm from "../components/LoginForm";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
-  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$/;
 
   const handleLogin = () => {
     if (!emailRegex.test(email)) {
@@ -63,8 +64,30 @@ const LoginScreen = ({ navigation }) => {
         setIsLoading(false);
       });
   };
+
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  const handleForgotPassword = () => {
+    if (!emailRegex.test(email)) {
+      Alert.alert(
+        "Invalid email",
+        "Please enter a valid email to reset password."
+      );
+      return;
+    }
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        Alert.alert(
+          "Password Reset",
+          "Check your email for password reset instructions."
+        );
+      })
+      .catch((error) => {
+        Alert.alert("Error", error.message);
+      });
   };
 
   return (
@@ -77,6 +100,7 @@ const LoginScreen = ({ navigation }) => {
       togglePasswordVisibility={togglePasswordVisibility}
       handleLogin={handleLogin}
       handleSignUp={handleSignUp}
+      handleForgotPassword={handleForgotPassword}
       isLoading={isLoading}
       errorMessage={errorMessage}
       isSignUp={isSignUp}

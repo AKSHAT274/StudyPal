@@ -17,6 +17,7 @@ const LoginForm = ({
   isPasswordVisible,
   togglePasswordVisibility,
   handleLogin,
+  handleForgotPassword,
   handleSignUp,
   isLoading,
   errorMessage,
@@ -73,6 +74,14 @@ const LoginForm = ({
             />
           </TouchableOpacity>
         </View>
+
+        
+        {!isSignUp && (
+          <TouchableOpacity onPress={handleForgotPassword}>
+            <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+          </TouchableOpacity>
+        )}
+
         <View style={styles.registerContainer}>
           <TouchableOpacity onPress={() => setIsSignUp(!isSignUp)}>
             <Text style={styles.registerText}>
@@ -158,6 +167,12 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: "#fff",
     fontSize: 15,
+  },
+  forgotPasswordText: {
+    color: "#456FE8",
+    alignSelf: "flex-end",
+    marginTop: 5,
+    fontSize: 14,
   },
   errorMessageContainer: {
     justifyContent: "center",
