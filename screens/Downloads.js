@@ -1,13 +1,15 @@
 // screens/Downloads.js
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import Background from '../components/Background';
 
 const Downloads = () => {
   return (
-    <View style={styles.container}>
+    <Background>
       <Text style={styles.title}>Downloads</Text>
       <Text style={styles.text}>This is the Downloads page.</Text>
-    </View>
+    </Background>
+
   );
 };
 

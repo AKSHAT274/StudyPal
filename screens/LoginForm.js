@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Background from '../components/Background';
 
 const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, togglePasswordVisibility, handleLogin, handleSignUp, isLoading, errorMessage }) => {
   return (
-    <View style={styles.container}>
+    <Background>
       <View>
         <Text style={styles.title}>Login</Text>
       </View>
@@ -59,7 +60,8 @@ const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, 
           <Text style={styles.errorMessage}>{errorMessage}</Text>
         </View>
       </View>
-    </View>
+    </Background>
+
   );
 };
 

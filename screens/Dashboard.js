@@ -1,11 +1,12 @@
 // screens/Dashboard.js
 import React from 'react';
-import { View, Text,Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { getAuth, signOut } from 'firebase/auth';
 import { auth } from '../firebase';
+import Background from '../components/Background';
 
 const Dashboard = ({ navigation }) => {
-  const user = auth.currentUser; 
+  const user = auth.currentUser;
 
   const handleLogout = () => {
     const authInstance = getAuth();
@@ -20,8 +21,8 @@ const Dashboard = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-    <Image 
+    <Background>
+      <Image
         source={require('../assets/profilepicDefault.jpg')} // Adjust the path as necessary
         style={styles.profileImage}
       />
@@ -32,7 +33,8 @@ const Dashboard = ({ navigation }) => {
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutButtonText}>Logout</Text>
       </TouchableOpacity>
-    </View>
+    </Background>
+
   );
 };
 
@@ -68,15 +70,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: '100%',
     alignItems: 'center',
-    elevation: 3, 
-    shadowColor: '#000', 
+    elevation: 3,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
   },
   logoutButtonText: {
     color: '#fff',
-    fontSize: 18, 
+    fontSize: 18,
     fontWeight: '600',
   },
   profileImage: {

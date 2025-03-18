@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import Background from '../components/Background';
 
 const booksData = [
   { id: '1', title: 'Introduction to Algorithms', author: 'Thomas H. Cormen', category: 'Algorithms' },
@@ -35,8 +36,8 @@ const Book = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>📚 Book List</Text>
+    <Background>
+    <Text style={styles.title}>📚 Book List</Text>
 
       {/* Search Bar */}
       <View style={styles.searchContainer}>
@@ -90,7 +91,7 @@ const Book = () => {
           </View>
         )}
       />
-    </View>
+    </Background>
   );
 };
 

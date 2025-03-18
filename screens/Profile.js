@@ -1,9 +1,17 @@
-// Profile.js
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const Profile = ({ route }) => {
   const user = route.params?.user; // Get user data from navigation params
+
+  if (!user) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Profile Details</Text>
+        <Text style={styles.detail}>User data not available.</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>

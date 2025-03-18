@@ -82,7 +82,7 @@ const {
       ],
     });
   
-    const result = await chatSession.sendMessage("give references to research paper related to this pdf");
+    const result = await chatSession.sendMessage("what is dog");
     console.log(result.response.text());
   }
   

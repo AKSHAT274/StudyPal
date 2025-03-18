@@ -27,29 +27,29 @@ const Syllabus = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Syllabus</Text>
+    <background> <Text style={styles.title}>Syllabus</Text>
 
-      {/* Search Bar */}
-      <TextInput
-        style={styles.searchBar}
-        placeholder="Search by subject or topic..."
-        value={searchQuery}
-        onChangeText={handleSearch}
-      />
+    {/* Search Bar */}
+    <TextInput
+      style={styles.searchBar}
+      placeholder="Search by subject or topic..."
+      value={searchQuery}
+      onChangeText={handleSearch}
+    />
 
-      {/* Syllabus list */}
-      <FlatList
-        data={syllabus}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.syllabusContainer}>
-            <Text style={styles.syllabusTitle}>{item.semester}</Text>
-            <Text style={styles.syllabusDetails}>Topic: {item.topic}</Text>
-          </View>
-        )}
-      />
-    </View>
+    {/* Syllabus list */}
+    <FlatList
+      data={syllabus}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <View style={styles.syllabusContainer}>
+          <Text style={styles.syllabusTitle}>{item.semester}</Text>
+          <Text style={styles.syllabusDetails}>Topic: {item.topic}</Text>
+        </View>
+      )}
+    />
+   </background>
+      
   );
 };
 

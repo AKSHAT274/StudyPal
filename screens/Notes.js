@@ -1,6 +1,7 @@
 // Notes.js
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Modal, TextInput, Alert } from 'react-native';
+import Background from '../components/Background';
 
 const Notes = () => {
   const [subjects, setSubjects] = useState({
@@ -59,7 +60,7 @@ const Notes = () => {
   };
 
   return (
-    <View style={styles.container}>
+     <Background>
       <View style={styles.subjectContainer}>
         {Object.keys(subjects).map((subject) => (
           <TouchableOpacity
@@ -135,7 +136,7 @@ const Notes = () => {
           </View>
         </View>
       </Modal>
-    </View>
+    </Background>
   );
 };
 
