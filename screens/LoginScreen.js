@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth } from "../services/firebase";
 import LoginForm from "./LoginForm";
 
 const LoginScreen = ({ navigation }) => {

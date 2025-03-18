@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth } from "../services/firebase";
 
 const SplashScreenComponent = ({ navigation }) => {
   const [appIsReady, setAppIsReady] = useState(false);
