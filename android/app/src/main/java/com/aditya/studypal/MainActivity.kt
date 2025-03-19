@@ -1,4 +1,4 @@
-package com.aditya.studypal
+package com.pal.studypal
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

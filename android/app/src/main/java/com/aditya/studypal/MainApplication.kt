@@ -1,4 +1,4 @@
-package com.aditya.studypal
+package com.pal.studypal
 
 import android.app.Application
 import android.content.res.Configuration

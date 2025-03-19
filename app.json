@@ -18,6 +18,10 @@
         "image": "./assets/studypal-logo.jpeg",
         "resizeMode": "contain",
         "backgroundColor": "#e0f7fa"
+      },
+      "bundleIdentifier": "com.pal.studypal",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -34,7 +38,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.aditya.studypal"
+      "package": "com.pal.studypal"
     },
     "web": {
       "favicon": "./assets/favicon.png"

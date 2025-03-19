@@ -24,7 +24,7 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="com.aditya.studypal"/>
+        <data android:scheme="com.pal.studypal"/>
       </intent-filter>
     </activity>
   </application>

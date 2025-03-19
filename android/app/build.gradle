@@ -86,9 +86,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.aditya.studypal'
+    namespace 'com.pal.studypal'
     defaultConfig {
-        applicationId 'com.aditya.studypal'
+        applicationId 'com.pal.studypal'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
