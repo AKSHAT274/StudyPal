@@ -1,5 +1,5 @@
 // LoginForm.js
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -17,10 +17,10 @@ const LoginForm = ({
   isPasswordVisible,
   togglePasswordVisibility,
   handleLogin,
-  handleForgotPassword,
   handleSignUp,
+  handleGoogleSignIn,
+  handleForgotPassword,
   isLoading,
-  errorMessage,
   isSignUp,
   setIsSignUp,
 }) => {
@@ -74,14 +74,9 @@ const LoginForm = ({
             />
           </TouchableOpacity>
         </View>
-
-        
-        {!isSignUp && (
-          <TouchableOpacity onPress={handleForgotPassword}>
-            <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-          </TouchableOpacity>
-        )}
-
+        <TouchableOpacity onPress={handleForgotPassword}>
+          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+        </TouchableOpacity>
         <View style={styles.registerContainer}>
           <TouchableOpacity onPress={() => setIsSignUp(!isSignUp)}>
             <Text style={styles.registerText}>
@@ -100,9 +95,12 @@ const LoginForm = ({
           </View>
         </TouchableOpacity>
 
-        <View style={styles.errorMessageContainer}>
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
-        </View>
+        <TouchableOpacity
+          onPress={handleGoogleSignIn}
+          style={styles.socialButton}
+        >
+          <Text style={styles.socialButtonText}>Sign in with Google</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -146,6 +144,11 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 10,
   },
+  forgotPasswordText: {
+    color: "#456FE8",
+    textAlign: "right",
+    marginTop: 5,
+  },
   registerContainer: {
     justifyContent: "flex-end",
     alignItems: "flex-end",
@@ -168,11 +171,17 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 15,
   },
-  forgotPasswordText: {
-    color: "#456FE8",
-    alignSelf: "flex-end",
-    marginTop: 5,
-    fontSize: 14,
+  socialButton: {
+    backgroundColor: "#ddd",
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    marginTop: 10,
+  },
+  socialButtonText: {
+    color: "#000",
+    fontSize: 15,
   },
   errorMessageContainer: {
     justifyContent: "center",
