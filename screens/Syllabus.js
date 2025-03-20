@@ -49,7 +49,8 @@ const Syllabus = () => {
   };
 
   return (
-    <Background> <Text style={styles.title}>Syllabus</Text>
+    <View> 
+      <Text style={styles.title}>Syllabus</Text>
 
       <TextInput
         style={styles.searchBar}
