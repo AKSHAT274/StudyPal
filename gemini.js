@@ -82,7 +82,7 @@ const {
       ],
     });
   
-    const result = await chatSession.sendMessage("what is dog");
+    const result = await chatSession.sendMessage();
     console.log(result.response.text());
   }
   
