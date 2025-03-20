@@ -15,7 +15,7 @@ const syllabusData = [
   { id: "4", semester: "III", topic: "Genetics" }
   // Add more syllabus items as needed
 ];
-
+import Background from '../components/Background';
 const Syllabus = () => {
   const [syllabus, setSyllabus] = useState(syllabusData);
   const [searchQuery, setSearchQuery] = useState("");
@@ -88,7 +88,9 @@ const Syllabus = () => {
             </Text>
           </View>}
       />
-    </View>
+    </Background >
+
+    
   );
 };
 

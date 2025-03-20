@@ -1,22 +1,49 @@
-// BookChat.js
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
+
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY; // Store securely in an env file
 
 const BookChat = () => {
   const [messages, setMessages] = useState([]);
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState("");
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (inputText.trim()) {
-      const newMessage = { id: messages.length + 1, text: inputText, sender: 'user' };
+      const newMessage = { id: Date.now(), text: inputText, sender: "user" };
       setMessages([...messages, newMessage]);
-      setInputText('');
+      setInputText("");
 
-      // Simulate a bot response
-      setTimeout(() => {
-        const botMessage = { id: messages.length + 2, text: 'This is a bot response.', sender: 'bot' };
+      const botResponse = await fetchGeminiResponse(inputText);
+      if (botResponse) {
+        const botMessage = { id: Date.now() + 1, text: botResponse, sender: "bot" };
         setMessages((prevMessages) => [...prevMessages, botMessage]);
-      }, 1000);
+      }
+    }
+  };
+
+  const fetchGeminiResponse = async (query) => {
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateText?key=${GEMINI_API_KEY}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: { text: query } }),
+        }
+      );
+
+      const data = await response.json();
+      return data?.candidates?.[0]?.output || "Sorry, I couldn't understand.";
+    } catch (error) {
+      console.error("Gemini API error:", error);
+      return "Error fetching response.";
     }
   };
 
@@ -28,7 +55,7 @@ const BookChat = () => {
             key={message.id}
             style={[
               styles.messageBubble,
-              message.sender === 'user' ? styles.userMessage : styles.botMessage,
+              message.sender === "user" ? styles.userMessage : styles.botMessage,
             ]}
           >
             <Text style={styles.messageText}>{message.text}</Text>
@@ -51,57 +78,22 @@ const BookChat = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  chatContainer: {
-    padding: 16,
-  },
-  messageBubble: {
-    maxWidth: '80%',
-    padding: 12,
-    borderRadius: 12,
-    marginBottom: 8,
-  },
-  userMessage: {
-    alignSelf: 'flex-end',
-    backgroundColor: '#456FE8',
-  },
-  botMessage: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#e0e0e0',
-  },
-  messageText: {
-    fontSize: 16,
-    color: '#fff',
-  },
+  container: { flex: 1, backgroundColor: "#f5f5f5" },
+  chatContainer: { padding: 16 },
+  messageBubble: { maxWidth: "80%", padding: 12, borderRadius: 12, marginBottom: 8 },
+  userMessage: { alignSelf: "flex-end", backgroundColor: "#456FE8" },
+  botMessage: { alignSelf: "flex-start", backgroundColor: "#e0e0e0" },
+  messageText: { fontSize: 16, color: "#fff" },
   inputContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 8,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderTopWidth: 1,
-    borderTopColor: '#ddd',
+    borderTopColor: "#ddd",
   },
-  input: {
-    flex: 1,
-    padding: 12,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 24,
-    marginRight: 8,
-  },
-  sendButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    backgroundColor: '#456FE8',
-    borderRadius: 24,
-  },
-  sendButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+  input: { flex: 1, padding: 12, backgroundColor: "#f0f0f0", borderRadius: 24, marginRight: 8 },
+  sendButton: { justifyContent: "center", alignItems: "center", paddingHorizontal: 16, backgroundColor: "#456FE8", borderRadius: 24 },
+  sendButtonText: { color: "#fff", fontSize: 16, fontWeight: "bold" },
 });
 
 export default BookChat;
