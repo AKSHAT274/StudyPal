@@ -1,29 +1,69 @@
 {
   "expo": {
-    "name": "helloexpo",
-    "slug": "helloexpo",
+    "name": "studypal",
+    "slug": "studypal",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/studypal-logo.jpeg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    // "plugins": ["@react-native-google-signin/google-signin"],
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/studypal-logo.jpeg",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#e0f7fa"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+        "image": "./assets/studypal-logo.jpeg",
+        "resizeMode": "contain",
+        "backgroundColor": "#e0f7fa"
+      },
+      "bundleIdentifier": "com.pal.studypal",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
+      // "intentFilters": [ 
+      //   {
+      //     "action": "VIEW",
+      //     "data": [
+      //       {
+      //         "scheme": "https",
+      //         "host": "studypal.app"
+      //       },
+      //       {
+      //         "scheme": "studypal"
+      //       }
+      //     ],
+      //     "category": ["BROWSABLE", "DEFAULT"]
+      //   }
+      // ],
+      "splash": {
+        "mdpi": "./assets/studypal-logo.jpeg",
+        "hdpi": "./assets/studypal-logo.jpeg",
+        "xhdpi": "./assets/studypal-logo.jpeg",
+        "xxhdpi": "./assets/studypal-logo.jpeg",
+        "xxxhdpi": "./assets/studypal-logo.jpeg",
+        "resizeMode": "contain",
+        "backgroundColor": "#e0f7fa"
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package":"com.aditya.studypal"
+      "package": "com.pal.studypal"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b724b7b8-c400-4a28-a2bb-9fdcfea10201"
+      }
     }
+    // "scheme":"studypal"
   }
 }

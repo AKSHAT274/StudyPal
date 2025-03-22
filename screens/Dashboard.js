@@ -1,23 +1,36 @@
 // screens/Dashboard.js
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import { getAuth, signOut } from 'firebase/auth';
-import { auth } from '../firebase';
+import React from "react";
+import {
+  View,
+  Text, 
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
+import { signOut } from "firebase/auth";
+import { auth } from "../services/firebase";
+import { CommonActions } from "@react-navigation/native";
 import Background from '../components/Background';
 
 const Dashboard = ({ navigation }) => {
   const user = auth.currentUser;
 
-  const handleLogout = () => {
-    const authInstance = getAuth();
-    signOut(authInstance)
-      .then(() => {
-        Alert.alert('Logged out successfully!');
-        navigation.navigate('Login');
-      })
-      .catch((error) => {
-        Alert.alert('Logout failed!', error.message);
-      });
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      Alert.alert("Logged out successfully!");
+
+      // Reset navigation stack and navigate to Login
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "Login" }], // Makes Login the only available screen
+        })
+      );
+    } catch (error) {
+      Alert.alert("Logout failed!", error.message);
+    }
   };
 
   return (
@@ -41,45 +54,45 @@ const Dashboard = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#e0f7fa',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#e0f7fa",
     padding: 20,
   },
   welcomeText: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
-    color: '#00796b',
+    color: "#00796b",
   },
   profileText: {
     fontSize: 22,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 10,
-    color: '#004d40',
+    color: "#004d40",
   },
   detail: {
     fontSize: 18,
-    color: '#555',
+    color: "#555",
     marginBottom: 20,
   },
   logoutButton: {
-    backgroundColor: '#d32f2f',
+    backgroundColor: "#d32f2f",
     paddingHorizontal: 20,
     paddingVertical: 15,
     borderRadius: 5,
-    width: '100%',
-    alignItems: 'center',
+    width: "100%",
+    alignItems: "center",
     elevation: 3,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
   },
   logoutButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   profileImage: {
     width: 100,

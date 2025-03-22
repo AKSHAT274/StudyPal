@@ -1,21 +1,51 @@
 // LoginForm.js
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import React from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Background from '../components/Background';
 
-const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, togglePasswordVisibility, handleLogin, handleSignUp, isLoading, errorMessage, isSignUp, setIsSignUp }) => {
+const LoginForm = ({
+  email,
+  setEmail,
+  password,
+  setPassword,
+  isPasswordVisible,
+  togglePasswordVisibility,
+  handleLogin,
+  handleSignUp,
+  handleGoogleSignIn,
+  promptAsync,
+  handleForgotPassword,
+  isLoading,
+  isSignUp,
+  setIsSignUp,
+}) => {
   return (
     <Background>
       <View>
         <Text style={styles.title}>{isSignUp ? "Sign Up" : "Login"}</Text>
       </View>
       <View>
-        <Text style={styles.titleLogin}>{isSignUp ? "Please sign up to continue." : "Please login to continue."}</Text>
+        <Text style={styles.titleLogin}>
+          {isSignUp
+            ? "Please sign up to continue."
+            : "Please login to continue."}
+        </Text>
       </View>
       <View style={styles.inputContainer}>
         <View style={styles.inputWrapper}>
-          <MaterialIcons name="mail" size={20} color="#9d9d9d" style={styles.icon} />
+          <MaterialIcons
+            name="mail"
+            size={20}
+            color="#9d9d9d"
+            style={styles.icon}
+          />
           <TextInput
             placeholder="Email"
             value={email}
@@ -24,7 +54,12 @@ const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, 
           />
         </View>
         <View style={styles.inputWrapper}>
-          <MaterialIcons name="lock" size={20} color="#9d9d9d" style={styles.icon} />
+          <MaterialIcons
+            name="lock"
+            size={20}
+            color="#9d9d9d"
+            style={styles.icon}
+          />
           <TextInput
             placeholder="Password"
             value={password}
@@ -41,25 +76,33 @@ const LoginForm = ({ email, setEmail, password, setPassword, isPasswordVisible, 
             />
           </TouchableOpacity>
         </View>
+        <TouchableOpacity onPress={handleForgotPassword}>
+          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+        </TouchableOpacity>
         <View style={styles.registerContainer}>
           <TouchableOpacity onPress={() => setIsSignUp(!isSignUp)}>
-          <Text style={styles.registerText}>
+            <Text style={styles.registerText}>
               {isSignUp ? "Already have an account?" : "Don’t have an account?"}
-              <Text style={styles.registerLink}>{isSignUp ? " Login" : " Sign Up"}</Text>
+              <Text style={styles.registerLink}>
+                {isSignUp ? " Login" : " Sign Up"}
+              </Text>
             </Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity onPress={isSignUp ? handleSignUp : handleLogin}>
           <View style={styles.loginButton}>
             <Text style={styles.loginButtonText}>
-            {isLoading ? "Loading..." : isSignUp ? "Sign Up" : "Login"}
+              {isLoading ? "Loading..." : isSignUp ? "Sign Up" : "Login"}
             </Text>
           </View>
         </TouchableOpacity>
 
-        <View style={styles.errorMessageContainer}>
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
-        </View>
+        {/* <TouchableOpacity
+          onPress={()=>promptAsync()}
+          style={styles.socialButton}
+        >
+          <Text style={styles.socialButtonText}>Sign in with Google</Text>
+        </TouchableOpacity> */}
       </View>
     </Background>
 
@@ -104,6 +147,11 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 10,
   },
+  forgotPasswordText: {
+    color: "#456FE8",
+    textAlign: "right",
+    marginTop: 5,
+  },
   registerContainer: {
     justifyContent: "flex-end",
     alignItems: "flex-end",
@@ -124,6 +172,18 @@ const styles = StyleSheet.create({
   },
   loginButtonText: {
     color: "#fff",
+    fontSize: 15,
+  },
+  socialButton: {
+    backgroundColor: "#ddd",
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    marginTop: 10,
+  },
+  socialButtonText: {
+    color: "#000",
     fontSize: 15,
   },
   errorMessageContainer: {
