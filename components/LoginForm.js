@@ -19,6 +19,7 @@ const LoginForm = ({
   handleLogin,
   handleSignUp,
   handleGoogleSignIn,
+  promptAsync,
   handleForgotPassword,
   isLoading,
   isSignUp,
@@ -95,12 +96,12 @@ const LoginForm = ({
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={handleGoogleSignIn}
+        {/* <TouchableOpacity
+          onPress={()=>promptAsync()}
           style={styles.socialButton}
         >
           <Text style={styles.socialButtonText}>Sign in with Google</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

@@ -7,6 +7,7 @@
     "icon": "./assets/studypal-logo.jpeg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    // "plugins": ["@react-native-google-signin/google-signin"],
     "splash": {
       "image": "./assets/studypal-logo.jpeg",
       "resizeMode": "contain",
@@ -25,6 +26,21 @@
       }
     },
     "android": {
+      // "intentFilters": [ 
+      //   {
+      //     "action": "VIEW",
+      //     "data": [
+      //       {
+      //         "scheme": "https",
+      //         "host": "studypal.app"
+      //       },
+      //       {
+      //         "scheme": "studypal"
+      //       }
+      //     ],
+      //     "category": ["BROWSABLE", "DEFAULT"]
+      //   }
+      // ],
       "splash": {
         "mdpi": "./assets/studypal-logo.jpeg",
         "hdpi": "./assets/studypal-logo.jpeg",
@@ -48,5 +64,6 @@
         "projectId": "b724b7b8-c400-4a28-a2bb-9fdcfea10201"
       }
     }
+    // "scheme":"studypal"
   }
 }
