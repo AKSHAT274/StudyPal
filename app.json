@@ -26,21 +26,6 @@
       }
     },
     "android": {
-      // "intentFilters": [ 
-      //   {
-      //     "action": "VIEW",
-      //     "data": [
-      //       {
-      //         "scheme": "https",
-      //         "host": "studypal.app"
-      //       },
-      //       {
-      //         "scheme": "studypal"
-      //       }
-      //     ],
-      //     "category": ["BROWSABLE", "DEFAULT"]
-      //   }
-      // ],
       "splash": {
         "mdpi": "./assets/studypal-logo.jpeg",
         "hdpi": "./assets/studypal-logo.jpeg",
@@ -63,7 +48,7 @@
       "eas": {
         "projectId": "b724b7b8-c400-4a28-a2bb-9fdcfea10201"
       }
-    }
-    // "scheme":"studypal"
+    },
+    "scheme":"studypal"
   }
 }

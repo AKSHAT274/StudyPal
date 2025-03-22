@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import Background from "../components/Background";
 
 const syllabusData = [
   { id: "1", semester: "I", topic: "Calculus" },
@@ -15,7 +16,7 @@ const syllabusData = [
   { id: "4", semester: "III", topic: "Genetics" },
   // Add more syllabus items as needed
 ];
-import Background from '../components/Background';
+
 const Syllabus = () => {
   const [syllabus, setSyllabus] = useState(syllabusData);
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,7 +50,7 @@ const Syllabus = () => {
   };
 
   return (
-    <View> 
+    <Background>
       <Text style={styles.title}>Syllabus</Text>
 
       <TextInput
@@ -84,9 +85,7 @@ const Syllabus = () => {
           </View>
         )}
       />
-    </Background >
-
-    
+    </Background>
   );
 };
 
